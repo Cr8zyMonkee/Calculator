@@ -6,47 +6,86 @@ function equal() {
 
 function add(add1, add2) {
     let addedValue = add1 + add2;
-    console.log(addedValue);
     total = addedValue;
 }
 
 
 function subtract(sub1, sub2) {
     let subValue = sub1 - sub2;
-    console.log(subValue);
     total = subValue;
 }
 
 
 function multiply(mul1, mul2) {
     let multValue = mul1 * mul2;
-    console.log(multValue);
     total = multValue;
 }
 
 
 function divide(div1, div2) {
-    let diviValue = div1 / div2;
-    console.log(diviValue);
-    total = diviValue;
+    if (div2 != 0) {
+        let diviValue = div1 / div2;
+        total = diviValue;
+    } else {
+        alert("You cannot divide by zero");
+        return;
+    }
 }
 
 
-function equals(numOne, numTwo, operation) {
-    if (operation === 'add') {
+function equals(numOne, numTwo) {
+    if (addition === true) {
         add(numOne, numTwo);
     }
-    else if (operation === 'sub') {
+    else if (subtraction === true) {
         subtract(numOne, numTwo);
     }
-    else if (operation === 'mult') {
+    else if (multi === true) {
         multiply(numOne, numTwo);
     }
-    else if (operation === 'divi') {
+    else if (divi === true) {
         divide(numOne, numTwo);
     }
+
+    addition = false;
+    subtraction = false;
+    divi = false;
+    multi = false;
+
 }
 
+function clear() {
+    displayCurrent = '0';
+    firstNum = '';
+    secondNum = '';
+    firstNumArr = [];
+    secondNumArr = [];
+    total = 0;
+    addition = false;
+    subtraction = false;
+    divi = false;
+    multi = false;
+    operatorPressed = false;
+    firstDecimalPressed = false;
+    secondDecimalPressed = false;
+    operationCompleted = false;
+    document.getElementById('display').innerHTML = displayCurrent;
+}
+
+function undo() {
+    if (operatorPressed === false) {
+        firstNumArr.push(tempNum);
+        firstNum = Number(firstNumArr.join(''));
+        displayCurrent = firstNum;
+        document.getElementById('display').innerHTML = displayCurrent;
+    }
+    else if (operatorPressed === true) {
+        secondNumArr.push(tempNum);
+        secondNum = Number(secondNumArr.join(''));
+        displayCurrent = secondNum;
+        document.getElementById('display').innerHTML = displayCurrent;
+    }
+}
 
 function operate() {
 
@@ -68,9 +107,11 @@ function operate() {
 }
 
 
-let displayCurrent = '';
-let firstNum = "";
-let secondNum = "";
+let displayCurrent = '0';
+let firstNum = '';
+let secondNum = '';
+let firstNumArr = [];
+let secondNumArr = [];
 let total = 0;
 let addition = false;
 let subtraction = false;
@@ -80,20 +121,28 @@ let operatorPressed = false;
 let firstDecimalPressed = false;
 let secondDecimalPressed = false;
 let operationCompleted = false;
+let addSym = '+';
+let subSym = '-';
+let multSym = 'x';
+let divSym = '÷';
+
+
+document.getElementById('display').innerHTML = displayCurrent;
 
 const displayBtn = document.querySelectorAll('button');
 displayBtn.forEach(function (display) {
     display.addEventListener('click', () => {
 
-        if(display.getAttribute('class') === 'numBtns'){
-            displayCurrent = displayCurrent =+ display.getAttribute('id');
-        }
-        else if(display.getAttribute('class') === 'equals'){
+        if (display.getAttribute('class') === 'equals') {
             return;
         }
-        else
-        {
-            displayCurrent = display.getAttribute('id');
+        else if (display.getAttribute('class') === 'operators' && operatorPressed === true) {
+            equals(Number(firstNum), Number(secondNum));
+            firstNum = Number(total);
+            secondNum = 0;
+            secondNumArr = [];
+            displayCurrent = Math.round(firstNum * 100) / 100;
+            document.getElementById('display').innerHTML = displayCurrent;
         }
 
         document.getElementById('display').innerHTML = displayCurrent;
@@ -105,7 +154,9 @@ const addBtn = document.querySelector('#add');
 addBtn.addEventListener('click', () => {
     addition = true;
     operatorPressed = true;
-    
+    displayCurrent = addSym;
+    document.getElementById('display').innerHTML = displayCurrent;
+
 })
 
 
@@ -113,6 +164,8 @@ const subBtn = document.querySelector('#sub');
 subBtn.addEventListener('click', () => {
     subtraction = true;
     operatorPressed = true;
+    displayCurrent = subSym;
+    document.getElementById('display').innerHTML = displayCurrent;
 })
 
 
@@ -120,6 +173,8 @@ const multBtn = document.querySelector('#mult');
 multBtn.addEventListener('click', () => {
     multi = true;
     operatorPressed = true;
+    displayCurrent = multSym;
+    document.getElementById('display').innerHTML = displayCurrent;
 })
 
 
@@ -127,42 +182,30 @@ const divBtn = document.querySelector('#divi');
 divBtn.addEventListener('click', () => {
     divi = true;
     operatorPressed = true;
+    displayCurrent = divSym;
+    document.getElementById('display').innerHTML = displayCurrent;
 })
 
 
 const clearBtn = document.querySelector('#clear')
 clearBtn.addEventListener('click', () => {
-    firstNum = 0;
-    secondNum = 0;
-    addition = false;
-    subtraction = false;
-    divi = false;
-    multi = false;
-    operatorPressed = false;
-    operationCompleted = false;
+    clear();
 })
 
 
 const equalBtn = document.querySelector('#equal');
 equalBtn.addEventListener('click', () => {
-    if(operationCompleted === false){
-        let operator;
-        if (addition === true) {
-            operator = 'add';
-        }
-        else if (subtraction === true) {
-            operator = 'sub'
-        }
-        else if (divi === true) {
-            operator = 'divi';
-        }
-        else if (multi === true) {
-            operator = 'mult';
-        }
-        equals(Number(firstNum), Number(secondNum), operator);
+    if ((firstNum != '' && secondNum != '') && operationCompleted === false) {
+        equals(Number(firstNum), Number(secondNum));
         operationCompleted = true;
-        displayCurrent = total.toString();
-        document.getElementById('display').innerHTML = displayCurrent; 
+        addition = false;
+        subtraction = false;
+        divi = false;
+        multi = false;
+        operatorPressed = false;
+        displayCurrent = Math.round(Number(total) * 100) / 100;
+        document.getElementById('display').innerHTML = displayCurrent;
+        total = 0;
     }
     return;
 })
@@ -173,22 +216,36 @@ numBtn.forEach(function (num) {
         let tempNum = num.getAttribute('id');
 
         if (operatorPressed === false) {
-            firstNum += tempNum;
+            firstNumArr.push(tempNum);
+            firstNum = Number(firstNumArr.join(''));
+            displayCurrent = firstNum;
+            document.getElementById('display').innerHTML = displayCurrent;
         }
         else if (operatorPressed === true) {
-            secondNum += tempNum;
+            secondNumArr.push(tempNum);
+            secondNum = Number(secondNumArr.join(''));
+            displayCurrent = secondNum;
+            document.getElementById('display').innerHTML = displayCurrent;
         }
+
+
     })
 })
 
 const decimalBtn = document.querySelector('#decimal');
 decimalBtn.addEventListener('click', () => {
     if (operatorPressed === false && firstDecimalPressed === false) {
-        firstNum += ".";
+        firstNumArr.push('.');
         firstDecimalPressed = true;
+        firstNum = firstNumArr.join('');
+        displayCurrent = firstNum;
+        document.getElementById('display').innerHTML = displayCurrent;
     }
     else if (operatorPressed === true && secondDecimalPressed === false) {
-        secondNum += ".";
+        secondNumArr.push(".");
         secondDecimalPressed = true;
+        secondNum = secondNumArr.join('');
+        displayCurrent = secondNum;
+        document.getElementById('display').innerHTML = displayCurrent;
     }
 })
