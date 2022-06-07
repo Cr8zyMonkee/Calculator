@@ -74,17 +74,16 @@ function clear() {
 
 function undo() {
     if (operatorPressed === false) {
-        firstNumArr.push(tempNum);
+        firstNumArr.pop();
         firstNum = Number(firstNumArr.join(''));
         displayCurrent = firstNum;
-        document.getElementById('display').innerHTML = displayCurrent;
     }
     else if (operatorPressed === true) {
-        secondNumArr.push(tempNum);
+        secondNumArr.pop();
         secondNum = Number(secondNumArr.join(''));
         displayCurrent = secondNum;
-        document.getElementById('display').innerHTML = displayCurrent;
     }
+    document.getElementById('display').innerHTML = displayCurrent;
 }
 
 function operate() {
@@ -155,8 +154,11 @@ addBtn.addEventListener('click', () => {
     addition = true;
     operatorPressed = true;
     displayCurrent = addSym;
-    document.getElementById('display').innerHTML = displayCurrent;
-
+    if(operatorPressed === true){
+        return;
+    }else{
+        document.getElementById('display').innerHTML = displayCurrent;
+    }
 })
 
 
@@ -165,7 +167,11 @@ subBtn.addEventListener('click', () => {
     subtraction = true;
     operatorPressed = true;
     displayCurrent = subSym;
-    document.getElementById('display').innerHTML = displayCurrent;
+    if(operatorPressed === true){
+        return;
+    }else{
+        document.getElementById('display').innerHTML = displayCurrent;
+    }
 })
 
 
@@ -174,7 +180,11 @@ multBtn.addEventListener('click', () => {
     multi = true;
     operatorPressed = true;
     displayCurrent = multSym;
-    document.getElementById('display').innerHTML = displayCurrent;
+    if(operatorPressed === true){
+        return;
+    }else{
+        document.getElementById('display').innerHTML = displayCurrent;
+    }
 })
 
 
@@ -183,7 +193,11 @@ divBtn.addEventListener('click', () => {
     divi = true;
     operatorPressed = true;
     displayCurrent = divSym;
-    document.getElementById('display').innerHTML = displayCurrent;
+    if(operatorPressed === true){
+        return;
+    }else{
+        document.getElementById('display').innerHTML = displayCurrent;
+    }
 })
 
 
