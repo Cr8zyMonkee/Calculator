@@ -1,53 +1,65 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Calculator</title>
-        <meta charset="UTF-8"/>
-        <link rel="stylesheet" href="styles.css"/>
-    </head>
 
-    <body>
+<head>
+    <title>Calculator</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+</head>
 
+<body>
+    <div id="pageContainer">
         <div id="display"></div>
 
         <div class="buttons">
-            <div class="numbers">
-                <div id="num0">
-                    <button id="0" class="numBtns" type="button">0</button>
+            <div class="topBar">
+                <div id="clear">
+                    <button id="clear" class="clear" type="button">C</button>
                 </div>
+                <div id="undo">
+                    <button id="undo" class="undo" type="button">Del</button>
+                </div>
+                <div id="addition">
+                    <button id="add" class="operators" type="button">+</button>
+                </div>
+            </div>
+            <div class="numbers">
                 <div id="num1">
-                    <button id="1" class="numBtns" type="button">1</button>
+                    <button id="n1" class="numBtns" type="button">1</button>
                 </div>
                 <div id="num2">
-                    <button id="2" class="numBtns" type="button">2</button>
+                    <button id="n2" class="numBtns" type="button">2</button>
                 </div>
                 <div id="num3">
-                    <button id="3" class="numBtns" type="button">3</button>
+                    <button id="n3" class="numBtns" type="button">3</button>
                 </div>
                 <div id="num4">
-                    <button id="4" class="numBtns" type="button">4</button>
+                    <button id="n4" class="numBtns" type="button">4</button>
                 </div>
                 <div id="num5">
-                    <button id="5" class="numBtns" type="button">5</button>
+                    <button id="n5" class="numBtns" type="button">5</button>
                 </div>
                 <div id="num6">
-                    <button id="6" class="numBtns" type="button">6</button>
+                    <button id="n6" class="numBtns" type="button">6</button>
                 </div>
                 <div id="num7">
-                    <button id="7" class="numBtns" type="button">7</button>
+                    <button id="n7" class="numBtns" type="button">7</button>
                 </div>
                 <div id="num8">
-                    <button id="8" class="numBtns" type="button">8</button>
+                    <button id="n8" class="numBtns" type="button">8</button>
                 </div>
                 <div id="num9">
-                    <button id="9" class="numBtns" type="button">9</button>
+                    <button id="n9" class="numBtns" type="button">9</button>
+                </div>
+                <div id="num0">
+                    <button id="n0" class="numBtns" type="button">0</button>
+                </div>
+                <div id="decimal">
+                    <button id="decimal" class="numBtns" type="button">.</button>
                 </div>
             </div>
 
             <div class="functions">
-                <div id="addition">
-                    <button id="add" class="operators" type="button">+</button>
-                </div>
                 <div id="subtraction">
                     <button id="sub" class="operators" type="button">-</button>
                 </div>
@@ -60,19 +72,12 @@
                 <div id="equals">
                     <button id="equal" class="equals" type="button">=</button>
                 </div>
-                <div id="decimal">
-                    <button id="decimal" class="decimal" type="button">.</button>
-                </div>
-                <div id="clear">
-                    <button id="clear" class="clear" type="button">C</button>
-                </div>
-                <div id="undo">
-                    <button id="undo" class="undo" type="button">Del</button>
-                </div>
             </div>
-            
-        </div>
 
-        <script type="text/javascript" src="script.js"></script>
-    </body>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
 </html>
